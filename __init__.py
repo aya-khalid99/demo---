@@ -157,9 +157,9 @@ def create_app(test_config=None):
     search_term = body.get('search_term', None)
 
     try:
-      selection = question.query.order_by(Question_id).filter(Question.title.ilike('%{}%'.format(search_term)))
+      selection = Question.query.order_by(Question_id).filter(Question.title.ilike('%{}%'.format(search_term)))
       current_questions = paginate_questions(request, selection)
-
+    except:
       return jsonify({
         'success': True,
         #'created': question.id,
